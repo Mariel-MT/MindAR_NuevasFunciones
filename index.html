@@ -83,18 +83,12 @@
 
       <!-- CÁMARA -->
 
-      <a-camera
-
-        position="0 0 0"
-
-        look-controls="enabled: false"
-
-        cursor="fuse: false; rayOrigin: mouse;"
-
-        raycaster="far: 10000; objects: .clickable">
-
-      </a-camera>
-
+    <a-camera
+  position="0 0 0"
+  look-controls="enabled: false"
+  cursor="rayOrigin: mouse; fuse: false"
+  raycaster="objects: .clickable; far: 10000">
+</a-camera>
 
       <!-- =========================
            TARGET 3 - GATO
@@ -266,22 +260,13 @@
          * =========================
          */
 
-        document
-          .querySelector("#gato")
-          .addEventListener("click", function() {
+       document.querySelector("#gato").addEventListener("click", function() {
+  console.log("TOQUE EN GATO");
 
-            this.setAttribute(
-              "src",
-              "#FoxModel"
-            );
-
-            this.setAttribute(
-              "scale",
-              "0.3 0.3 0.3"
-            );
-
-          });
-
+  this.setAttribute("src", "#FoxModel");
+  this.setAttribute("position", "0 0 0");
+  this.setAttribute("scale", "0.3 0.3 0.3");
+});
 
 
         /*
@@ -290,21 +275,14 @@
          * =========================
          */
 
-        document
-          .querySelector("#fox")
-          .addEventListener("click", function() {
+       document.querySelector("#fox").addEventListener("click", function() {
+  console.log("TOQUE EN FOX");
 
-            this.setAttribute(
-              "src",
-              "#SandiaModel"
-            );
+  this.setAttribute("src", "#SandiaModel");
+  this.setAttribute("position", "0 -0.4 0");
+  this.setAttribute("scale", "0.5 0.5 0.5");
+});
 
-            this.setAttribute(
-              "scale",
-              "0.5 0.5 0.5"
-            );
-
-          });
 
 
 
@@ -314,22 +292,13 @@
          * =========================
          */
 
-        document
-          .querySelector("#sandia")
-          .addEventListener("click", function() {
+      document.querySelector("#sandia").addEventListener("click", function() {
+  console.log("TOQUE EN SANDIA");
 
-            this.setAttribute(
-              "src",
-              "#GhostModel"
-            );
-
-            this.setAttribute(
-              "scale",
-              "0.3 0.3 0.3"
-            );
-
-          });
-
+  this.setAttribute("src", "#GhostModel");
+  this.setAttribute("position", "0 0 0");
+  this.setAttribute("scale", "0.3 0.3 0.3");
+});
 
 
         /*
@@ -339,22 +308,13 @@
          */
 
         document
-          .querySelector("#ghost")
-          .addEventListener("click", function() {
+        document.querySelector("#ghost").addEventListener("click", function() {
+  console.log("TOQUE EN GHOST");
 
-            this.setAttribute(
-              "src",
-              "#GatoBananaModel"
-            );
-
-            this.setAttribute(
-              "scale",
-              "0.8 0.8 0.8"
-            );
-
-          });
-
-      });
+  this.setAttribute("src", "#GatoBananaModel");
+  this.setAttribute("position", "0 -1.5 0");
+  this.setAttribute("scale", "0.8 0.8 0.8");
+});
 
     </script>
 
