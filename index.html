@@ -10,7 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
 
-    <!-- FEEDBACK VISUAL -->
+    <!-- =========================
+         FEEDBACK VISUAL
+    ========================== -->
 
     <style>
 
@@ -33,7 +35,10 @@
 
   <body>
 
-    <!-- MENSAJE -->
+
+    <!-- =========================
+         MENSAJE
+    ========================== -->
 
     <div id="mensaje">
       🔍 Escanea un target
@@ -53,7 +58,9 @@
       device-orientation-permission-ui="enabled: false">
 
 
-      <!-- MODELOS -->
+      <!-- =========================
+           MODELOS
+      ========================== -->
 
       <a-assets>
 
@@ -80,7 +87,9 @@
       </a-assets>
 
 
-      <!-- CÁMARA -->
+      <!-- =========================
+           CÁMARA
+      ========================== -->
 
       <a-camera
         position="0 0 0"
@@ -90,114 +99,238 @@
       </a-camera>
 
 
-      <!-- =========================
+      <!-- ==================================================
            TARGET 3 - GATO
-      ========================== -->
+      ================================================== -->
 
       <a-entity
+        id="targetGato"
         mindar-image-target="targetIndex: 3">
 
+
+        <!-- GATO -->
+
         <a-gltf-model
-
-          id="gato"
-
-          class="clickable"
-
+          class="clickable gato-model"
           src="#GatoBananaModel"
-
-          rotation="0 0 0"
-
           position="0 -1.5 0"
-
           scale="0.8 0.8 0.8"
-
           animation-mixer>
-
         </a-gltf-model>
+
+
+        <!-- FOX -->
+
+        <a-gltf-model
+          class="fox-model"
+          src="#FoxModel"
+          position="0 0 0"
+          scale="0.3 0.3 0.3"
+          visible="false"
+          animation-mixer>
+        </a-gltf-model>
+
+
+        <!-- SANDÍA -->
+
+        <a-gltf-model
+          class="sandia-model"
+          src="#SandiaModel"
+          position="0 -0.4 0"
+          scale="0.5 0.5 0.5"
+          visible="false"
+          animation-mixer>
+        </a-gltf-model>
+
+
+        <!-- GHOST -->
+
+        <a-gltf-model
+          class="ghost-model"
+          src="#GhostModel"
+          position="0 0 0"
+          scale="0.3 0.3 0.3"
+          visible="false"
+          animation-mixer>
+        </a-gltf-model>
+
 
       </a-entity>
 
 
-      <!-- =========================
+      <!-- ==================================================
            TARGET 1 - FOX
-      ========================== -->
+      ================================================== -->
 
       <a-entity
+        id="targetFox"
         mindar-image-target="targetIndex: 1">
 
+
+        <!-- GATO -->
+
         <a-gltf-model
-
-          id="fox"
-
-          class="clickable"
-
-          src="#FoxModel"
-
-          rotation="0 0 0"
-
-          position="0 0 0"
-
-          scale="0.3 0.3 0.3"
-
+          class="gato-model"
+          src="#GatoBananaModel"
+          position="0 -1.5 0"
+          scale="0.8 0.8 0.8"
+          visible="false"
           animation-mixer>
-
         </a-gltf-model>
+
+
+        <!-- FOX -->
+
+        <a-gltf-model
+          class="clickable fox-model"
+          src="#FoxModel"
+          position="0 0 0"
+          scale="0.3 0.3 0.3"
+          animation-mixer>
+        </a-gltf-model>
+
+
+        <!-- SANDÍA -->
+
+        <a-gltf-model
+          class="sandia-model"
+          src="#SandiaModel"
+          position="0 -0.4 0"
+          scale="0.5 0.5 0.5"
+          visible="false"
+          animation-mixer>
+        </a-gltf-model>
+
+
+        <!-- GHOST -->
+
+        <a-gltf-model
+          class="ghost-model"
+          src="#GhostModel"
+          position="0 0 0"
+          scale="0.3 0.3 0.3"
+          visible="false"
+          animation-mixer>
+        </a-gltf-model>
+
 
       </a-entity>
 
 
-      <!-- =========================
-           TARGET 2 - SANDIA
-      ========================== -->
+      <!-- ==================================================
+           TARGET 2 - SANDÍA
+      ================================================== -->
 
       <a-entity
+        id="targetSandia"
         mindar-image-target="targetIndex: 2">
 
+
+        <!-- GATO -->
+
         <a-gltf-model
-
-          id="sandia"
-
-          class="clickable"
-
-          src="#SandiaModel"
-
-          rotation="0 0 0"
-
-          position="0 -0.4 0"
-
-          scale="0.5 0.5 0.5"
-
+          class="gato-model"
+          src="#GatoBananaModel"
+          position="0 -1.5 0"
+          scale="0.8 0.8 0.8"
+          visible="false"
           animation-mixer>
-
         </a-gltf-model>
+
+
+        <!-- FOX -->
+
+        <a-gltf-model
+          class="fox-model"
+          src="#FoxModel"
+          position="0 0 0"
+          scale="0.3 0.3 0.3"
+          visible="false"
+          animation-mixer>
+        </a-gltf-model>
+
+
+        <!-- SANDÍA -->
+
+        <a-gltf-model
+          class="clickable sandia-model"
+          src="#SandiaModel"
+          position="0 -0.4 0"
+          scale="0.5 0.5 0.5"
+          animation-mixer>
+        </a-gltf-model>
+
+
+        <!-- GHOST -->
+
+        <a-gltf-model
+          class="ghost-model"
+          src="#GhostModel"
+          position="0 0 0"
+          scale="0.3 0.3 0.3"
+          visible="false"
+          animation-mixer>
+        </a-gltf-model>
+
 
       </a-entity>
 
 
-      <!-- =========================
+      <!-- ==================================================
            TARGET 0 - GHOST
-      ========================== -->
+      ================================================== -->
 
       <a-entity
+        id="targetGhost"
         mindar-image-target="targetIndex: 0">
 
+
+        <!-- GATO -->
+
         <a-gltf-model
-
-          id="ghost"
-
-          class="clickable"
-
-          src="#GhostModel"
-
-          rotation="0 0 0"
-
-          position="0 0 0"
-
-          scale="0.3 0.3 0.3"
-
+          class="gato-model"
+          src="#GatoBananaModel"
+          position="0 -1.5 0"
+          scale="0.8 0.8 0.8"
+          visible="false"
           animation-mixer>
-
         </a-gltf-model>
+
+
+        <!-- FOX -->
+
+        <a-gltf-model
+          class="fox-model"
+          src="#FoxModel"
+          position="0 0 0"
+          scale="0.3 0.3 0.3"
+          visible="false"
+          animation-mixer>
+        </a-gltf-model>
+
+
+        <!-- SANDÍA -->
+
+        <a-gltf-model
+          class="sandia-model"
+          src="#SandiaModel"
+          position="0 -0.4 0"
+          scale="0.5 0.5 0.5"
+          visible="false"
+          animation-mixer>
+        </a-gltf-model>
+
+
+        <!-- GHOST -->
+
+        <a-gltf-model
+          class="clickable ghost-model"
+          src="#GhostModel"
+          position="0 0 0"
+          scale="0.3 0.3 0.3"
+          animation-mixer>
+        </a-gltf-model>
+
 
       </a-entity>
 
@@ -207,7 +340,7 @@
 
     <!-- =========================
          INTERACCIÓN + FEEDBACK
-    ========================= -->
+    ========================== -->
 
     <script>
 
@@ -227,6 +360,7 @@
         document
           .querySelectorAll("[mindar-image-target]")
           .forEach((target) => {
+
 
             target.addEventListener(
               "targetFound",
@@ -249,262 +383,178 @@
               }
             );
 
+
           });
 
 
         /*
          * =========================
-         * FUNCIÓN PARA CREAR
-         * UN NUEVO MODELO
+         * CAMBIO DE MODELO
          * =========================
          */
 
-        function cambiarModelo(modeloActual, nuevoModelo, posicion, escala, siguienteFuncion) {
-
-          const padre = modeloActual.parentElement;
-
-          const nuevo = document.createElement("a-gltf-model");
+        function cambiarModelo(target, modeloActual, siguienteModelo) {
 
 
-          nuevo.setAttribute("class", "clickable");
+          // Ocultar modelo actual
 
-          nuevo.setAttribute("src", nuevoModelo);
-
-          nuevo.setAttribute("position", posicion);
-
-          nuevo.setAttribute("scale", escala);
-
-          nuevo.setAttribute("rotation", "0 0 0");
+          modeloActual.setAttribute(
+            "visible",
+            "false"
+          );
 
 
-          /*
-           * Cuando el nuevo modelo termine
-           * de cargar, activamos su animación
-           */
+          // Quitarle la clase clickable
 
-          nuevo.addEventListener("model-loaded", () => {
-
-            nuevo.setAttribute("animation-mixer", "");
-
-          });
+          modeloActual.classList.remove(
+            "clickable"
+          );
 
 
-          /*
-           * Cuando se toque el nuevo modelo,
-           * pasa al siguiente
-           */
+          // Mostrar siguiente modelo
 
-          nuevo.addEventListener("click", siguienteFuncion);
-
-
-          /*
-           * Primero agregamos el nuevo modelo
-           */
-
-          padre.appendChild(nuevo);
+          siguienteModelo.setAttribute(
+            "visible",
+            "true"
+          );
 
 
-          /*
-           * Después eliminamos el modelo anterior
-           */
+          // Hacer que el siguiente modelo
+          // pueda recibir el toque
 
-          modeloActual.remove();
+          siguienteModelo.classList.add(
+            "clickable"
+          );
+
 
         }
 
 
         /*
          * =========================
-         * GATO → FOX
+         * FUNCIÓN PARA CONFIGURAR
+         * LOS MODELOS DE CADA TARGET
          * =========================
          */
 
-        document.querySelector("#gato").addEventListener("click", function() {
+        function configurarTarget(target) {
 
-          console.log("TOQUE EN GATO");
 
-          const modeloActual = this;
+          const modelos =
+            target.querySelectorAll("a-gltf-model");
 
-          cambiarModelo(
-            modeloActual,
-            "#FoxModel",
-            "0 0 0",
-            "0.3 0.3 0.3",
 
-            function() {
+          let indiceActual = 0;
 
-              console.log("TOQUE EN FOX");
 
-              cambiarModelo(
-                this,
-                "#SandiaModel",
-                "0 -0.4 0",
-                "0.5 0.5 0.5",
+          /*
+           * Buscar cuál modelo empieza visible
+           */
 
-                function() {
+          modelos.forEach((modelo, indice) => {
 
-                  console.log("TOQUE EN SANDIA");
+            if (
+              modelo.getAttribute("visible") !== false &&
+              modelo.getAttribute("visible") !== "false"
+            ) {
 
-                  cambiarModelo(
-                    this,
-                    "#GhostModel",
-                    "0 0 0",
-                    "0.3 0.3 0.3",
+              indiceActual = indice;
 
-                    function() {
+            }
 
-                      console.log("TOQUE EN GHOST");
+          });
 
-                      cambiarModelo(
-                        this,
-                        "#GatoBananaModel",
-                        "0 -1.5 0",
-                        "0.8 0.8 0.8",
 
-                        function() {
+          /*
+           * Agregar interacción
+           */
 
-                          console.log("TOQUE EN GATO");
+          modelos.forEach((modelo) => {
 
-                        }
 
-                      );
+            modelo.addEventListener(
+              "click",
+              function() {
+
+
+                console.log(
+                  "MODELO TOCADO"
+                );
+
+
+                /*
+                 * Buscar índice actual
+                 */
+
+                let actual = -1;
+
+                modelos.forEach(
+                  (m, i) => {
+
+                    if (
+                      m.classList.contains(
+                        "clickable"
+                      )
+                    ) {
+
+                      actual = i;
 
                     }
 
-                  );
-
-                }
-
-              );
-
-            }
-
-          );
-
-        });
+                  }
+                );
 
 
-        /*
-         * =========================
-         * FOX → SANDIA
-         * =========================
-         */
+                /*
+                 * Siguiente modelo
+                 */
 
-        document.querySelector("#fox").addEventListener("click", function() {
+                let siguiente =
+                  (actual + 1) %
+                  modelos.length;
 
-          console.log("TOQUE EN FOX");
 
-          cambiarModelo(
-            this,
-            "#SandiaModel",
-            "0 -0.4 0",
-            "0.5 0.5 0.5",
+                cambiarModelo(
+                  target,
+                  modelos[actual],
+                  modelos[siguiente]
+                );
 
-            function() {
 
-              console.log("TOQUE EN SANDIA");
+              }
+            );
 
-              cambiarModelo(
-                this,
-                "#GhostModel",
-                "0 0 0",
-                "0.3 0.3 0.3",
 
-                function() {
+          });
 
-                  console.log("TOQUE EN GHOST");
 
-                  cambiarModelo(
-                    this,
-                    "#GatoBananaModel",
-                    "0 -1.5 0",
-                    "0.8 0.8 0.8",
-
-                    function() {
-
-                      console.log("TOQUE EN GATO");
-
-                    }
-
-                  );
-
-                }
-
-              );
-
-            }
-
-          );
-
-        });
+        }
 
 
         /*
          * =========================
-         * SANDIA → GHOST
+         * CONFIGURAR LOS 4 TARGETS
          * =========================
          */
 
-        document.querySelector("#sandia").addEventListener("click", function() {
-
-          console.log("TOQUE EN SANDIA");
-
-          cambiarModelo(
-            this,
-            "#GhostModel",
-            "0 0 0",
-            "0.3 0.3 0.3",
-
-            function() {
-
-              console.log("TOQUE EN GHOST");
-
-              cambiarModelo(
-                this,
-                "#GatoBananaModel",
-                "0 -1.5 0",
-                "0.8 0.8 0.8",
-
-                function() {
-
-                  console.log("TOQUE EN GATO");
-
-                }
-
-              );
-
-            }
-
-          );
-
-        });
+        configurarTarget(
+          document.querySelector("#targetGato")
+        );
 
 
-        /*
-         * =========================
-         * GHOST → GATO
-         * =========================
-         */
+        configurarTarget(
+          document.querySelector("#targetFox")
+        );
 
-        document.querySelector("#ghost").addEventListener("click", function() {
 
-          console.log("TOQUE EN GHOST");
+        configurarTarget(
+          document.querySelector("#targetSandia")
+        );
 
-          cambiarModelo(
-            this,
-            "#GatoBananaModel",
-            "0 -1.5 0",
-            "0.8 0.8 0.8",
 
-            function() {
-
-              console.log("TOQUE EN GATO");
-
-            }
-
-          );
-
-        });
+        configurarTarget(
+          document.querySelector("#targetGhost")
+        );
 
 
       });
