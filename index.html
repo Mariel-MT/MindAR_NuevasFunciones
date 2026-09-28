@@ -301,20 +301,24 @@
 });
 
 
-        /*
+       /*
          * =========================
          * GHOST → GATO
          * =========================
          */
 
-        document
         document.querySelector("#ghost").addEventListener("click", function() {
-  console.log("TOQUE EN GHOST");
 
-  this.setAttribute("src", "#GatoBananaModel");
-  this.setAttribute("position", "0 -1.5 0");
-  this.setAttribute("scale", "0.8 0.8 0.8");
-});
+          console.log("TOQUE EN GHOST");
+
+          this.setAttribute("src", "#GatoBananaModel");
+          this.setAttribute("position", "0 -1.5 0");
+          this.setAttribute("scale", "0.8 0.8 0.8");
+
+        });
+
+
+      }); // ← Cierra DOMContentLoaded
 
     </script>
 
