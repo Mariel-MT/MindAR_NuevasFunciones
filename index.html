@@ -228,7 +228,6 @@
           .querySelectorAll("[mindar-image-target]")
           .forEach((target) => {
 
-
             target.addEventListener(
               "targetFound",
               () => {
@@ -255,29 +254,61 @@
 
         /*
          * =========================
-         * FUNCIÓN PARA CAMBIAR MODELO
+         * FUNCIÓN PARA CREAR
+         * UN NUEVO MODELO
          * =========================
          */
 
-        function cambiarModelo(modelo, nuevaPosicion, nuevaEscala) {
+        function cambiarModelo(modeloActual, nuevoModelo, posicion, escala, siguienteFuncion) {
 
-          // Quitamos temporalmente la animación
-          this.removeAttribute("animation-mixer");
+          const padre = modeloActual.parentElement;
 
-          // Cambiamos el modelo GLB
-          this.setAttribute("gltf-model", modelo);
+          const nuevo = document.createElement("a-gltf-model");
 
-          // Cambiamos posición y escala
-          this.setAttribute("position", nuevaPosicion);
-          this.setAttribute("scale", nuevaEscala);
 
-          // Cuando termine de cargar el nuevo modelo,
-          // volvemos a activar la animación
-          this.addEventListener("model-loaded", function() {
+          nuevo.setAttribute("class", "clickable");
 
-            this.setAttribute("animation-mixer", "");
+          nuevo.setAttribute("src", nuevoModelo);
 
-          }, { once: true });
+          nuevo.setAttribute("position", posicion);
+
+          nuevo.setAttribute("scale", escala);
+
+          nuevo.setAttribute("rotation", "0 0 0");
+
+
+          /*
+           * Cuando el nuevo modelo termine
+           * de cargar, activamos su animación
+           */
+
+          nuevo.addEventListener("model-loaded", () => {
+
+            nuevo.setAttribute("animation-mixer", "");
+
+          });
+
+
+          /*
+           * Cuando se toque el nuevo modelo,
+           * pasa al siguiente
+           */
+
+          nuevo.addEventListener("click", siguienteFuncion);
+
+
+          /*
+           * Primero agregamos el nuevo modelo
+           */
+
+          padre.appendChild(nuevo);
+
+
+          /*
+           * Después eliminamos el modelo anterior
+           */
+
+          modeloActual.remove();
 
         }
 
@@ -292,11 +323,62 @@
 
           console.log("TOQUE EN GATO");
 
-          cambiarModelo.call(
-            this,
+          const modeloActual = this;
+
+          cambiarModelo(
+            modeloActual,
             "#FoxModel",
             "0 0 0",
-            "0.3 0.3 0.3"
+            "0.3 0.3 0.3",
+
+            function() {
+
+              console.log("TOQUE EN FOX");
+
+              cambiarModelo(
+                this,
+                "#SandiaModel",
+                "0 -0.4 0",
+                "0.5 0.5 0.5",
+
+                function() {
+
+                  console.log("TOQUE EN SANDIA");
+
+                  cambiarModelo(
+                    this,
+                    "#GhostModel",
+                    "0 0 0",
+                    "0.3 0.3 0.3",
+
+                    function() {
+
+                      console.log("TOQUE EN GHOST");
+
+                      cambiarModelo(
+                        this,
+                        "#GatoBananaModel",
+                        "0 -1.5 0",
+                        "0.8 0.8 0.8",
+
+                        function() {
+
+                          console.log("TOQUE EN GATO");
+
+                        }
+
+                      );
+
+                    }
+
+                  );
+
+                }
+
+              );
+
+            }
+
           );
 
         });
@@ -312,11 +394,46 @@
 
           console.log("TOQUE EN FOX");
 
-          cambiarModelo.call(
+          cambiarModelo(
             this,
             "#SandiaModel",
             "0 -0.4 0",
-            "0.5 0.5 0.5"
+            "0.5 0.5 0.5",
+
+            function() {
+
+              console.log("TOQUE EN SANDIA");
+
+              cambiarModelo(
+                this,
+                "#GhostModel",
+                "0 0 0",
+                "0.3 0.3 0.3",
+
+                function() {
+
+                  console.log("TOQUE EN GHOST");
+
+                  cambiarModelo(
+                    this,
+                    "#GatoBananaModel",
+                    "0 -1.5 0",
+                    "0.8 0.8 0.8",
+
+                    function() {
+
+                      console.log("TOQUE EN GATO");
+
+                    }
+
+                  );
+
+                }
+
+              );
+
+            }
+
           );
 
         });
@@ -332,11 +449,32 @@
 
           console.log("TOQUE EN SANDIA");
 
-          cambiarModelo.call(
+          cambiarModelo(
             this,
             "#GhostModel",
             "0 0 0",
-            "0.3 0.3 0.3"
+            "0.3 0.3 0.3",
+
+            function() {
+
+              console.log("TOQUE EN GHOST");
+
+              cambiarModelo(
+                this,
+                "#GatoBananaModel",
+                "0 -1.5 0",
+                "0.8 0.8 0.8",
+
+                function() {
+
+                  console.log("TOQUE EN GATO");
+
+                }
+
+              );
+
+            }
+
           );
 
         });
@@ -352,11 +490,18 @@
 
           console.log("TOQUE EN GHOST");
 
-          cambiarModelo.call(
+          cambiarModelo(
             this,
             "#GatoBananaModel",
             "0 -1.5 0",
-            "0.8 0.8 0.8"
+            "0.8 0.8 0.8",
+
+            function() {
+
+              console.log("TOQUE EN GATO");
+
+            }
+
           );
 
         });
