@@ -255,6 +255,35 @@
 
         /*
          * =========================
+         * FUNCIÓN PARA CAMBIAR MODELO
+         * =========================
+         */
+
+        function cambiarModelo(modelo, nuevaPosicion, nuevaEscala) {
+
+          // Quitamos temporalmente la animación
+          this.removeAttribute("animation-mixer");
+
+          // Cambiamos el modelo GLB
+          this.setAttribute("gltf-model", modelo);
+
+          // Cambiamos posición y escala
+          this.setAttribute("position", nuevaPosicion);
+          this.setAttribute("scale", nuevaEscala);
+
+          // Cuando termine de cargar el nuevo modelo,
+          // volvemos a activar la animación
+          this.addEventListener("model-loaded", function() {
+
+            this.setAttribute("animation-mixer", "");
+
+          }, { once: true });
+
+        }
+
+
+        /*
+         * =========================
          * GATO → FOX
          * =========================
          */
@@ -263,9 +292,12 @@
 
           console.log("TOQUE EN GATO");
 
-          this.setAttribute("src", "#FoxModel");
-          this.setAttribute("position", "0 0 0");
-          this.setAttribute("scale", "0.3 0.3 0.3");
+          cambiarModelo.call(
+            this,
+            "#FoxModel",
+            "0 0 0",
+            "0.3 0.3 0.3"
+          );
 
         });
 
@@ -280,9 +312,12 @@
 
           console.log("TOQUE EN FOX");
 
-          this.setAttribute("src", "#SandiaModel");
-          this.setAttribute("position", "0 -0.4 0");
-          this.setAttribute("scale", "0.5 0.5 0.5");
+          cambiarModelo.call(
+            this,
+            "#SandiaModel",
+            "0 -0.4 0",
+            "0.5 0.5 0.5"
+          );
 
         });
 
@@ -297,9 +332,12 @@
 
           console.log("TOQUE EN SANDIA");
 
-          this.setAttribute("src", "#GhostModel");
-          this.setAttribute("position", "0 0 0");
-          this.setAttribute("scale", "0.3 0.3 0.3");
+          cambiarModelo.call(
+            this,
+            "#GhostModel",
+            "0 0 0",
+            "0.3 0.3 0.3"
+          );
 
         });
 
@@ -314,9 +352,12 @@
 
           console.log("TOQUE EN GHOST");
 
-          this.setAttribute("src", "#GatoBananaModel");
-          this.setAttribute("position", "0 -1.5 0");
-          this.setAttribute("scale", "0.8 0.8 0.8");
+          cambiarModelo.call(
+            this,
+            "#GatoBananaModel",
+            "0 -1.5 0",
+            "0.8 0.8 0.8"
+          );
 
         });
 
