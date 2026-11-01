@@ -1,5 +1,7 @@
 <script>
-document.addEventListener("DOMContentLoaded", () => {const mensaje = document.querySelector("#mensaje");
+document.addEventListener("DOMContentLoaded", () => {
+
+  const mensaje = document.querySelector("#mensaje");
 
   // CONFIGURACIÓN DE LOS MODELOS
 
@@ -25,17 +27,28 @@ document.addEventListener("DOMContentLoaded", () => {const mensaje = document.qu
       escala: "0.3 0.3 0.3"
     }
   ];
+
   // FEEDBACK VISUAL DE LOS TARGETS
+
   document.querySelectorAll("[mindar-image-target]").forEach(target => {
 
-    target.addEventListener("targetFound", () => { mensaje.innerHTML = "✅ IMAGEN DETECTADA<br>TOCA PARA CAMBIAR DE MODELO";});
+    target.addEventListener("targetFound", () => {
+      mensaje.innerHTML =
+        "✅ IMAGEN DETECTADA<br>TOCA LA PANTALLA PARA CAMBIAR MODELO";
+    });
 
-    target.addEventListener("targetLost", () => { mensaje.innerHTML = "🔍 ESCANEA UNA IMAGEN"; });
+    target.addEventListener("targetLost", () => {
+      mensaje.innerHTML = "🔍 ESCANEA UNA IMAGEN";
+    });
+
   });
 
   // FUNCIÓN PARA CAMBIAR DE MODELO
-  
-  function activarInteraccion(id, indiceInicial) { const entidad = document.querySelector(id);
+
+  function activarInteraccion(id, indiceInicial) {
+
+    const entidad = document.querySelector(id);
+
     if (!entidad) {
       console.error("No se encontró la entidad:", id);
       return;
