@@ -1,566 +1,149 @@
-<html>
-  <head>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  const mensaje = document.querySelector("#mensaje");
 
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  // =================================
+  // CONFIGURACIÓN DE LOS MODELOS
+  // =================================
 
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
+  const modelos = [
+    {
+      src: "#GatoBananaModel",
+      posicion: "0 -1.5 0",
+      escala: "0.8 0.8 0.8"
+    },
+    {
+      src: "#FoxModel",
+      posicion: "0 0 0",
+      escala: "0.3 0.3 0.3"
+    },
+    {
+      src: "#SandiaModel",
+      posicion: "0 -0.4 0",
+      escala: "0.5 0.5 0.5"
+    },
+    {
+      src: "#GhostModel",
+      posicion: "0 0 0",
+      escala: "0.3 0.3 0.3"
+    }
+  ];
 
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  // =================================
+  // FEEDBACK VISUAL DE LOS TARGETS
+  // =================================
 
+  document.querySelectorAll("[mindar-image-target]").forEach(target => {
 
-    <!-- =========================
-         FEEDBACK VISUAL
-    ========================== -->
+    target.addEventListener("targetFound", () => {
+      mensaje.innerHTML =
+        "✅ Target detectado<br>Toca el modelo para cambiarlo";
+    });
 
-    <style>
+    target.addEventListener("targetLost", () => {
+      mensaje.innerHTML = "🔍 Escanea un target";
+    });
 
-      #mensaje {
-        position: fixed;
-        top: 20px;
-        width: 100%;
-        text-align: center;
-        color: white;
-        font-family: Arial;
-        font-size: 22px;
-        z-index: 9999;
-        text-shadow: 2px 2px 5px black;
-      }
+  });
 
-    </style>
+  // =================================
+  // FUNCIÓN PARA CAMBIAR DE MODELO
+  // =================================
 
-  </head>
+  function activarInteraccion(id, indiceInicial) {
 
+    const entidad = document.querySelector(id);
 
-  <body>
+    if (!entidad) {
+      console.error("No se encontró la entidad:", id);
+      return;
+    }
 
+    let indiceActual = indiceInicial;
+    let cargando = false;
 
-    <!-- =========================
-         MENSAJE
-    ========================== -->
+    entidad.addEventListener("click", () => {
 
-    <div id="mensaje">
-      🔍 Escanea un target
-    </div>
+      // Evitar varios toques mientras carga
+      if (cargando) return;
 
+      cargando = true;
 
-    <a-scene
+      const siguienteIndice =
+        (indiceActual + 1) % modelos.length;
 
-      mindar-image="imageTargetSrc: ./markerc.mind; maxTrack: 4"
+      const siguienteModelo = modelos[siguienteIndice];
 
-      color-space="sRGB"
+      console.log("Cambiando a:", siguienteModelo.src);
 
-      renderer="colorManagement: true, physicallyCorrectLights"
+      // Esperar a que el nuevo modelo cargue
+      const alCargar = () => {
 
-      vr-mode-ui="enabled: false"
+        entidad.removeEventListener("model-loaded", alCargar);
 
-      device-orientation-permission-ui="enabled: false">
-
-
-      <!-- =========================
-           MODELOS
-      ========================== -->
-
-      <a-assets>
-
-        <a-asset-item
-          id="GatoBananaModel"
-          src="./GatoBanana.glb">
-        </a-asset-item>
-
-        <a-asset-item
-          id="FoxModel"
-          src="./Fox.glb">
-        </a-asset-item>
-
-        <a-asset-item
-          id="SandiaModel"
-          src="./Sandia.glb">
-        </a-asset-item>
-
-        <a-asset-item
-          id="GhostModel"
-          src="./Ghost.glb">
-        </a-asset-item>
-
-      </a-assets>
-
-
-      <!-- =========================
-           CÁMARA
-      ========================== -->
-
-      <a-camera
-        position="0 0 0"
-        look-controls="enabled: false"
-        cursor="rayOrigin: mouse; fuse: false"
-        raycaster="objects: .clickable; far: 10000">
-      </a-camera>
-
-
-      <!-- ==================================================
-           TARGET 3 - GATO
-      ================================================== -->
-
-      <a-entity
-        id="targetGato"
-        mindar-image-target="targetIndex: 3">
-
-
-        <!-- GATO -->
-
-        <a-gltf-model
-          class="clickable gato-model"
-          src="#GatoBananaModel"
-          position="0 -1.5 0"
-          scale="0.8 0.8 0.8"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- FOX -->
-
-        <a-gltf-model
-          class="fox-model"
-          src="#FoxModel"
-          position="0 0 0"
-          scale="0.3 0.3 0.3"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- SANDÍA -->
-
-        <a-gltf-model
-          class="sandia-model"
-          src="#SandiaModel"
-          position="0 -0.4 0"
-          scale="0.5 0.5 0.5"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- GHOST -->
-
-        <a-gltf-model
-          class="ghost-model"
-          src="#GhostModel"
-          position="0 0 0"
-          scale="0.3 0.3 0.3"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-      </a-entity>
-
-
-      <!-- ==================================================
-           TARGET 1 - FOX
-      ================================================== -->
-
-      <a-entity
-        id="targetFox"
-        mindar-image-target="targetIndex: 1">
-
-
-        <!-- GATO -->
-
-        <a-gltf-model
-          class="gato-model"
-          src="#GatoBananaModel"
-          position="0 -1.5 0"
-          scale="0.8 0.8 0.8"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- FOX -->
-
-        <a-gltf-model
-          class="clickable fox-model"
-          src="#FoxModel"
-          position="0 0 0"
-          scale="0.3 0.3 0.3"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- SANDÍA -->
-
-        <a-gltf-model
-          class="sandia-model"
-          src="#SandiaModel"
-          position="0 -0.4 0"
-          scale="0.5 0.5 0.5"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- GHOST -->
-
-        <a-gltf-model
-          class="ghost-model"
-          src="#GhostModel"
-          position="0 0 0"
-          scale="0.3 0.3 0.3"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-      </a-entity>
-
-
-      <!-- ==================================================
-           TARGET 2 - SANDÍA
-      ================================================== -->
-
-      <a-entity
-        id="targetSandia"
-        mindar-image-target="targetIndex: 2">
-
-
-        <!-- GATO -->
-
-        <a-gltf-model
-          class="gato-model"
-          src="#GatoBananaModel"
-          position="0 -1.5 0"
-          scale="0.8 0.8 0.8"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- FOX -->
-
-        <a-gltf-model
-          class="fox-model"
-          src="#FoxModel"
-          position="0 0 0"
-          scale="0.3 0.3 0.3"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- SANDÍA -->
-
-        <a-gltf-model
-          class="clickable sandia-model"
-          src="#SandiaModel"
-          position="0 -0.4 0"
-          scale="0.5 0.5 0.5"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- GHOST -->
-
-        <a-gltf-model
-          class="ghost-model"
-          src="#GhostModel"
-          position="0 0 0"
-          scale="0.3 0.3 0.3"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-      </a-entity>
-
-
-      <!-- ==================================================
-           TARGET 0 - GHOST
-      ================================================== -->
-
-      <a-entity
-        id="targetGhost"
-        mindar-image-target="targetIndex: 0">
-
-
-        <!-- GATO -->
-
-        <a-gltf-model
-          class="gato-model"
-          src="#GatoBananaModel"
-          position="0 -1.5 0"
-          scale="0.8 0.8 0.8"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- FOX -->
-
-        <a-gltf-model
-          class="fox-model"
-          src="#FoxModel"
-          position="0 0 0"
-          scale="0.3 0.3 0.3"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- SANDÍA -->
-
-        <a-gltf-model
-          class="sandia-model"
-          src="#SandiaModel"
-          position="0 -0.4 0"
-          scale="0.5 0.5 0.5"
-          visible="false"
-          animation-mixer>
-        </a-gltf-model>
-
-
-        <!-- GHOST -->
-
-        <a-gltf-model
-          class="clickable ghost-model"
-          src="#GhostModel"
-          position="0 0 0"
-          scale="0.3 0.3 0.3"
-          animation-mixer>
-        </a-gltf-model>
-
-
-      </a-entity>
-
-
-    </a-scene>
-
-
-    <!-- =========================
-         INTERACCIÓN + FEEDBACK
-    ========================== -->
-
-    <script>
-
-      document.addEventListener("DOMContentLoaded", () => {
-
-
-        const mensaje =
-          document.querySelector("#mensaje");
-
-
-        /*
-         * =========================
-         * FEEDBACK DE LOS TARGETS
-         * =========================
-         */
-
-        document
-          .querySelectorAll("[mindar-image-target]")
-          .forEach((target) => {
-
-
-            target.addEventListener(
-              "targetFound",
-              () => {
-
-                mensaje.innerHTML =
-                  "✅ Target detectado<br>Toca el modelo para cambiarlo";
-
-              }
-            );
-
-
-            target.addEventListener(
-              "targetLost",
-              () => {
-
-                mensaje.innerHTML =
-                  "🔍 Escanea un target";
-
-              }
-            );
-
-
-          });
-
-
-        /*
-         * =========================
-         * CAMBIO DE MODELO
-         * =========================
-         */
-
-        function cambiarModelo(target, modeloActual, siguienteModelo) {
-
-
-          // Ocultar modelo actual
-
-          modeloActual.setAttribute(
-            "visible",
-            "false"
-          );
-
-
-          // Quitarle la clase clickable
-
-          modeloActual.classList.remove(
-            "clickable"
-          );
-
-
-          // Mostrar siguiente modelo
-
-          siguienteModelo.setAttribute(
-            "visible",
-            "true"
-          );
-
-
-          // Hacer que el siguiente modelo
-          // pueda recibir el toque
-
-          siguienteModelo.classList.add(
-            "clickable"
-          );
-
-
-        }
-
-
-        /*
-         * =========================
-         * FUNCIÓN PARA CONFIGURAR
-         * LOS MODELOS DE CADA TARGET
-         * =========================
-         */
-
-        function configurarTarget(target) {
-
-
-          const modelos =
-            target.querySelectorAll("a-gltf-model");
-
-
-          let indiceActual = 0;
-
-
-          /*
-           * Buscar cuál modelo empieza visible
-           */
-
-          modelos.forEach((modelo, indice) => {
-
-            if (
-              modelo.getAttribute("visible") !== false &&
-              modelo.getAttribute("visible") !== "false"
-            ) {
-
-              indiceActual = indice;
-
-            }
-
-          });
-
-
-          /*
-           * Agregar interacción
-           */
-
-          modelos.forEach((modelo) => {
-
-
-            modelo.addEventListener(
-              "click",
-              function() {
-
-
-                console.log(
-                  "MODELO TOCADO"
-                );
-
-
-                /*
-                 * Buscar índice actual
-                 */
-
-                let actual = -1;
-
-                modelos.forEach(
-                  (m, i) => {
-
-                    if (
-                      m.classList.contains(
-                        "clickable"
-                      )
-                    ) {
-
-                      actual = i;
-
-                    }
-
-                  }
-                );
-
-
-                /*
-                 * Siguiente modelo
-                 */
-
-                let siguiente =
-                  (actual + 1) %
-                  modelos.length;
-
-
-                cambiarModelo(
-                  target,
-                  modelos[actual],
-                  modelos[siguiente]
-                );
-
-
-              }
-            );
-
-
-          });
-
-
-        }
-
-
-        /*
-         * =========================
-         * CONFIGURAR LOS 4 TARGETS
-         * =========================
-         */
-
-        configurarTarget(
-          document.querySelector("#targetGato")
+        // Actualizar posición y escala
+        entidad.setAttribute(
+          "position",
+          siguienteModelo.posicion
         );
 
-
-        configurarTarget(
-          document.querySelector("#targetFox")
+        entidad.setAttribute(
+          "scale",
+          siguienteModelo.escala
         );
 
+        // Actualizar el índice
+        indiceActual = siguienteIndice;
 
-        configurarTarget(
-          document.querySelector("#targetSandia")
-        );
+        cargando = false;
 
+        console.log("Modelo cambiado correctamente");
+      };
 
-        configurarTarget(
-          document.querySelector("#targetGhost")
-        );
+      // Detectar errores de carga
+      const alError = (evento) => {
 
+        entidad.removeEventListener("model-error", alError);
+        entidad.removeEventListener("model-loaded", alCargar);
 
+        cargando = false;
+
+        console.error("Error al cargar el modelo:", evento);
+
+      };
+
+      entidad.addEventListener("model-loaded", alCargar, {
+        once: true
       });
 
-    </script>
+      entidad.addEventListener("model-error", alError, {
+        once: true
+      });
 
+      // Cambiar el modelo
+      entidad.setAttribute("src", siguienteModelo.src);
 
-  </body>
-</html>
+      // Reiniciar animación
+      entidad.removeAttribute("animation-mixer");
+
+      entidad.setAttribute("animation-mixer", "");
+
+    });
+
+  }
+
+  // =================================
+  // ACTIVAR INTERACCIÓN EN CADA MODELO
+  // =================================
+
+  activarInteraccion("#gato", 0);
+
+  activarInteraccion("#fox", 1);
+
+  activarInteraccion("#sandia", 2);
+
+  activarInteraccion("#ghost", 3);
+
+});
+</script>
